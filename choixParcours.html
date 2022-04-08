@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choix parcours</title>
     <style>
+		html{
+			scroll-behavior: smooth;
+		}
         body {
             background-color: #f1f1f1;
             font-family: Arial, Helvetica, sans-serif;
@@ -290,7 +293,7 @@
 /* Algo de tri */
 /*****************************************/
         function processData(){
-            for(let i=1 ; i<nbParcours+1 ; i++){
+            for(let i=1 ; i<nomGroupes.length+1 ; i++){
                 let aTraiter = [];
                 etudiants.forEach(etudiant => {
                     let voeux = getVoeux(etudiant, i);
