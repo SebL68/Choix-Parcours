@@ -2,104 +2,133 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choix parcours</title>
-    <style>
-		html{
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Choix parcours</title>
+	<style>
+		html {
 			scroll-behavior: smooth;
 		}
-        body {
-            background-color: #f1f1f1;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        h1{
-            border-bottom: 4px solid #90c;
-        }
-        ol>li{
-            margin-bottom: 16px;
-            position: relative;
-        }
-        ul{
-            display: inline-flex;
-            flex-direction: column;
-        }
-        ul>li{
-            background: #aaa;
-            margin: 2px 0;
-            padding: 2px 16px;
-            border-radius: 4px;
-        }
-        .parcours{
-            background: #09c !important;
-        }
-        .voeux{
-            background: #0c9 !important;
-        }
-/**************************************/
-		.tableau{
+
+		body {
+			background-color: #f1f1f1;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		h1 {
+			border-bottom: 4px solid #90c;
+		}
+
+		ol>li {
+			margin-bottom: 16px;
+			position: relative;
+		}
+
+		ul {
+			display: inline-flex;
+			flex-direction: column;
+		}
+
+		ul>li {
+			background: #aaa;
+			margin: 2px 0;
+			padding: 2px 16px;
+			border-radius: 4px;
+		}
+
+		.parcours {
+			background: #09c !important;
+		}
+
+		.voeux {
+			background: #0c9 !important;
+		}
+
+		/**************************************/
+		.tableau {
 			display: inline-grid;
 			grid-template-columns: repeat(7, auto);
-			gap:1px;
+			gap: 1px;
 			background: #ccc;
 		}
-		.tableau>div{
+
+		.tableau>div {
 			background: #fff;
 			padding: 2px 4px;
-			white-space:nowrap;
+			white-space: nowrap;
 		}
-		.thead, .tableau>.thead{
-            padding: 8px 16px;
+
+		.thead,
+		.tableau>.thead {
+			padding: 8px 16px;
 			background: #aaa;
 			color: #fff;
 		}
-		.tableau>.big{
+
+		.tableau>.big {
 			font-weight: bold;
 		}
-		.pasteZone{
+
+		.pasteZone {
 			position: absolute;
-			top:0;
+			top: 0;
 			left: 0;
 		}
-        input.paste{
-            border: none;
-            padding: 10px 18px;
-            border-radius: 4px;
-            background: #90c;
+
+		input.paste {
+			border: none;
+			padding: 10px 18px;
+			border-radius: 4px;
+			background: #90c;
 			animation: pioupiou 2s infinite;
-        }
-        input.paste~div{
-            position: absolute;
-            top: 8px;
-            left: 16px;
-            pointer-events: none;
-            color: #fff;
+		}
+
+		input.paste~div {
+			position: absolute;
+			top: 8px;
+			left: 16px;
+			pointer-events: none;
+			color: #fff;
 			animation: pioupiou 2s infinite;
-        } 
-        input.paste+div+div{
-            display: none;
-            color: #000;
-        }
-        input.paste:focus{
-            background: #9c0;
+		}
+
+		input.paste+div+div {
+			display: none;
+			color: #000;
+		}
+
+		input.paste:focus {
+			background: #9c0;
 			animation: initial;
-        }
-        input.paste:focus+div{
-            display: none;
+		}
+
+		input.paste:focus+div {
+			display: none;
 			animation: initial;
-        }
-        input.paste:focus+div+div{
-            display: block;
+		}
+
+		input.paste:focus+div+div {
+			display: block;
 			animation: initial;
 		}
 
 		@keyframes pioupiou {
-			0%, 25%, 100%{opacity:0}
-			50%, 75%{opacity: 1}
+
+			0%,
+			25%,
+			100% {
+				opacity: 0
+			}
+
+			50%,
+			75% {
+				opacity: 1
+			}
 		}
-/*************************************/
-		button{
+
+		/*************************************/
+		button {
 			background: #09c;
 			color: #fff;
 			border: none;
@@ -109,47 +138,53 @@
 			cursor: pointer;
 			margin-top: 64px;
 		}
-		.resultat>div{
+
+		.resultat>div {
 			display: inline-grid;
 			background: #aaa;
 			gap: 1px;
 		}
-		.resultat>div>.thead{
+
+		.resultat>div>.thead {
 			background: #09c;
 			font-weight: bold;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		}
-		.resultat>div>div{
+
+		.resultat>div>div {
 			background: #FFF;
 			padding: 2px 4px;
 		}
-    </style>
+	</style>
 </head>
 
 <body>
-    <main>
-        <h1>Automatisation du choix de parcours</h1>
-        <p>Cette application utilise les algorythmes de mariages stables pour placer les étudiants dans les parcours en fonctions de leurs voeux.</p>
-        <ol>
-            <li>Utilisez le <a href="https://github.com/SebL68/Choix-Parcours">fichier xlsx</a> ou créez un tableau, avec les colonnes :<br>
-                <ul>
-                    <li>Nom / Prénom</li>
-                    <li class=parcours>Notes premier parcours</li>
-                    <li class=parcours>Notes deuxième parcours</li>
-                    <li class=parcours>Notes troisième parcours</li>
-                    <li class=parcours>Etc.</li>
-                    <li class=voeux>Voeux premier parcours</li>
-                    <li class=voeux>Voeux deuxième parcours</li>
-                    <li class=voeux>Voeux troisième parcours</li>
-                    <li class=voeux>Etc.</li>
-                </ul>
-            </li>
+	<main>
+		<h1>Automatisation du choix de parcours</h1>
+		<p>Cette application utilise les algorythmes de mariages stables pour placer les étudiants dans les parcours en
+			fonctions de leurs voeux.</p>
+		<ol>
+			<li>Utilisez le <a href="https://github.com/SebL68/Choix-Parcours">fichier xlsx</a> ou créez un tableau,
+				avec les colonnes :<br>
+				<ul>
+					<li>Nom / Prénom</li>
+					<li class=parcours>Notes premier parcours</li>
+					<li class=parcours>Notes deuxième parcours</li>
+					<li class=parcours>Notes troisième parcours</li>
+					<li class=parcours>Etc.</li>
+					<li class=voeux>Voeux premier parcours</li>
+					<li class=voeux>Voeux deuxième parcours</li>
+					<li class=voeux>Voeux troisième parcours</li>
+					<li class=voeux>Etc.</li>
+				</ul>
+			</li>
 			<li>Ajoutez le nombre d'admis dans chaque parcours comme sur l'exemple ci-après.</li>
-            <li>Complétez les notes afin de créer un classement des étudiants dans chaque parcours.<br>Ces notes peuvent être extraites des moyennes UE ou réalisées par les enseignants.</li>
-            <li>Copiez toutes les valeurs de votre tableur avec l'entête.</li>
-            <li>
+			<li>Complétez les notes afin de créer un classement des étudiants dans chaque parcours.<br>Ces notes peuvent
+				être extraites des moyennes UE ou réalisées par les enseignants.</li>
+			<li>Copiez toutes les valeurs de votre tableur avec l'entête.</li>
+			<li>
 				<div class="tableau">
 					<div class="thead">Nom</div>
 					<div class="thead parcours">Notes UE2</div>
@@ -204,50 +239,50 @@
 					<div>Cliquez ici</div>
 					<div>Collez les valeurs</div>
 				</div>
-                
-            </li>
-        </ol>
+
+			</li>
+		</ol>
 		<div class="resultat"></div>
-    </main>
+	</main>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx-populate/1.21.0/xlsx-populate.min.js"></script>
-    <script>
-        let etudiants = [];
+	<script>
+		let etudiants = [];
 		let nomGroupes = [];
-        let correspondance = {};
-        let groupes = {};
-        let max = {};
+		let correspondance = {};
+		let groupes = {};
+		let max = {};
 		let entete = [];
 
 		/*Exemples :
 		
 		let nomGroupes = [
-            "Stratégie de communication",
-            "Création numérique",
-            "Développement Web"
-        ]
-        let correspondance = {
-            "Stratégie de communication": "UE1.2",
-            "Création numérique": "UE1.3",
-            "Développement Web": "UE1.4"
-        }
-        let groupes = {
-            "Stratégie de communication": [],
-            "Création numérique": [],
-            "Développement Web": []
-        }
-        let max = {
-            "Stratégie de communication": 28,
-            "Création numérique": 14,
-            "Développement Web": 14
-        }*/
+			"Stratégie de communication",
+			"Création numérique",
+			"Développement Web"
+		]
+		let correspondance = {
+			"Stratégie de communication": "UE1.2",
+			"Création numérique": "UE1.3",
+			"Développement Web": "UE1.4"
+		}
+		let groupes = {
+			"Stratégie de communication": [],
+			"Création numérique": [],
+			"Développement Web": []
+		}
+		let max = {
+			"Stratégie de communication": 28,
+			"Création numérique": 14,
+			"Développement Web": 14
+		}*/
 
-        document.querySelector(".paste").addEventListener("paste", pasteData);
+		document.querySelector(".paste").addEventListener("paste", pasteData);
 
-/**********************************************/
-/* Initialisation après avoir collé les datas */
-/**********************************************/
-        function pasteData(event){
-            event.preventDefault();
+		/**********************************************/
+		/* Initialisation après avoir collé les datas */
+		/**********************************************/
+		function pasteData(event) {
+			event.preventDefault();
 			etudiants = [];
 			nomGroupes = [];
 			correspondance = {};
@@ -255,84 +290,84 @@
 			max = {};
 			entete = [];
 
-            let data = event.clipboardData.getData('Text');
-            let lignes = data.split(/\r\n|\r|\n/g);
-            
-            entete = lignes[0].split(/\t/g);
+			let data = event.clipboardData.getData('Text');
+			let lignes = data.split(/\r\n|\r|\n/g);
+
+			entete = lignes[0].split(/\t/g);
 			let nbParcours = (entete.length - 1) / 2;
 			let somme = 0;
 
-			for(let i=1+nbParcours ; i<entete.length ; i++){
+			for (let i = 1 + nbParcours; i < entete.length; i++) {
 				nomGroupes.push(entete[i]);
-				correspondance[entete[i]] = entete[i-nbParcours];
+				correspondance[entete[i]] = entete[i - nbParcours];
 				groupes[entete[i]] = [];
 				let nb = parseInt(lignes[1].split(/\t/g)[i]);
 				max[entete[i]] = nb;
 				somme += nb;
 			}
 
-            for(let i=2 ; i<lignes.length ; i++){
-                let etudiant = {};
-                let ligne = lignes[i].split(/\t/g);
-                if(ligne[0]){
-                    for(let j=0 ; j<entete.length ; j++){
-                        etudiant[entete[j]] = ligne[j]?.replace(",", ".");
-                    }
-                    etudiants.push(etudiant);
-                }
-            }
+			for (let i = 2; i < lignes.length; i++) {
+				let etudiant = {};
+				let ligne = lignes[i].split(/\t/g);
+				if (ligne[0]) {
+					for (let j = 0; j < entete.length; j++) {
+						etudiant[entete[j]] = ligne[j]?.replace(",", ".");
+					}
+					etudiants.push(etudiant);
+				}
+			}
 
 			if (etudiants.length > somme) {
 				document.body.innerHTML = "<h1>Attention : pas assez de places dans les groupes par rapport au nombre d'étudiants !</h1>"
 			} else {
 				processData();
 			}
-        }
+		}
 
-/*****************************************/
-/* Algo de tri */
-/*****************************************/
-        function processData(){
-            for(let i=1 ; i<nomGroupes.length+1 ; i++){
-                let aTraiter = [];
-                etudiants.forEach(etudiant => {
-                    let voeux = getVoeux(etudiant, i);
-                    if (groupes[voeux].length < max[voeux]) {   // Le groupe n'est pas plein, on y ajoute l'étudiant
-                        groupes[voeux].push(etudiant);
-                    } else {
-                        aTraiter.push(groupePlein(voeux, etudiant));
-                    }
-                })
-                etudiants = aTraiter;
-            }
+		/*****************************************/
+		/* Algo de tri */
+		/*****************************************/
+		function processData() {
+			for (let i = 1; i < nomGroupes.length + 1; i++) {
+				let aTraiter = [];
+				etudiants.forEach(etudiant => {
+					let voeux = getVoeux(etudiant, i);
+					if (groupes[voeux].length < max[voeux]) {   // Le groupe n'est pas plein, on y ajoute l'étudiant
+						groupes[voeux].push(etudiant);
+					} else {
+						aTraiter.push(groupePlein(voeux, etudiant));
+					}
+				})
+				etudiants = aTraiter;
+			}
 
 			showData();
-        }
+		}
 
-/*****************************************/
-/* Affichage des résultats */
-/*****************************************/
-		function showData(){
-            console.log(groupes);
-			
+		/*****************************************/
+		/* Affichage des résultats */
+		/*****************************************/
+		function showData() {
+			console.log(groupes);
+
 			let output = "<button onclick='download()'>Télécharger les résultats</button>";
-			nomGroupes.forEach(groupe=>{
+			nomGroupes.forEach(groupe => {
 				/* Tri par nom */
-				groupes[groupe] = groupes[groupe].sort((a, b)=>{
-					if(a[entete[0]] < b[entete[0]]) {
-						return -1; 
-					} else { 
+				groupes[groupe] = groupes[groupe].sort((a, b) => {
+					if (a[entete[0]] < b[entete[0]]) {
+						return -1;
+					} else {
 						return 1;
 					}
 				})
 
 				/* Affichage */
 				output += `<h1>Groupe ${groupe} - ${groupes[groupe].length}</h1><div>`;
-				entete.forEach(thead=>{
+				entete.forEach(thead => {
 					output += `<div class=thead>${thead}</div>`;
 				})
-				groupes[groupe].forEach(etudiant=>{
-					entete.forEach(colonne=>{
+				groupes[groupe].forEach(etudiant => {
+					entete.forEach(colonne => {
 						output += `<div>${etudiant[colonne]}</div>`;
 					})
 				})
@@ -343,88 +378,94 @@
 			document.querySelector(".resultat").scrollIntoView();
 		}
 
-		function download(){
+		function download() {
 			XlsxPopulate.fromBlankAsync()
-            .then(workbook => {
-				const sheet = workbook.sheet(0);
-				sheet.name("Groupes");
+				.then(workbook => {
+					const sheet = workbook.sheet(0);
+					sheet.name("Groupes");
 
-				let ligne = 1;
-				nomGroupes.forEach(groupe=>{
-					sheet.cell("A" + ligne).value(groupe).style({
-						bold: true,
-						fontSize : 16
-					});
-					ligne++;
+					let ligne = 1;
+					nomGroupes.forEach(groupe => {
+						sheet.cell("A" + ligne).value(groupe).style({
+							bold: true,
+							fontSize: 16
+						});
+						ligne++;
 
-					entete.forEach(thead=>{
-						let column = 65;
-						entete.forEach(thead=>{
-							sheet.cell(String.fromCharCode(column) + ligne).value(thead).style({
-								bold: true
-							});
-							column++;
+						entete.forEach(thead => {
+							let column = 65;
+							entete.forEach(thead => {
+								sheet.cell(String.fromCharCode(column) + ligne).value(thead).style({
+									bold: true
+								});
+								column++;
+							})
 						})
-					})
-					ligne++;
+						ligne++;
 
-					groupes[groupe].forEach(etudiant=>{
-						let column = 65;
-						entete.forEach(colonne=>{
-							sheet.cell(String.fromCharCode(column) + ligne).value(etudiant[colonne]);
-							column++;
+						groupes[groupe].forEach(etudiant => {
+							let column = 65;
+							entete.forEach(colonne => {
+								sheet.cell(String.fromCharCode(column) + ligne).value(etudiant[colonne]);
+								column++;
+							})
+							ligne++;
 						})
 						ligne++;
 					})
-					ligne++;
+
+					saveFile("Groupes calculés", workbook);
 				})
-				
-				saveFile("Groupes calculés", workbook);
-			})
 		}
 
 		function saveFile(name, workbook) {
 			workbook.outputAsync()
-			.then(function (blob) {
-				var url = window.URL.createObjectURL(blob);
-				var a = document.createElement("a");
-				document.body.appendChild(a);
-				a.href = url;
-				a.download = name + ".xlsx";
-				a.click();
-				window.URL.revokeObjectURL(url);
-				document.body.removeChild(a);
-			});
+				.then(function (blob) {
+					var url = window.URL.createObjectURL(blob);
+					var a = document.createElement("a");
+					document.body.appendChild(a);
+					a.href = url;
+					a.download = name + ".xlsx";
+					a.click();
+					window.URL.revokeObjectURL(url);
+					document.body.removeChild(a);
+				});
 		}
 
-/*****************************************/
-/* Fonctions d'aides */
-/*****************************************/
+		/*****************************************/
+		/* Fonctions d'aides */
+		/*****************************************/
 
-        function getVoeux(etudiant, num) {
-            for (let i = 0, maxGroupes = nomGroupes.length; i < maxGroupes; i++) {
-                if (etudiant[nomGroupes[i]] == num) {
-                    return nomGroupes[i];
-                }
-            }
+		function getVoeux(etudiant, num) {
+			for (let i = 0, maxGroupes = nomGroupes.length; i < maxGroupes; i++) {
+				if (etudiant[nomGroupes[i]] == num) {
+					return nomGroupes[i];
+				}
+			}
 
 			document.body.innerHTML = `<h1>Attention : l'étudiant(e) ${etudiant[entete[0]]} n'a pas de groupe.</h1>`;
-            throw new Error();
-        }
+			throw new Error();
+		}
 
-        function groupePlein(nomGroupe, etudiant){
-            groupes[nomGroupe] = groupes[nomGroupe].sort((a, b)=>{
-                return a[correspondance[nomGroupe]] - b[correspondance[nomGroupe]];
-            })
+		function groupePlein(nomGroupe, etudiant) {
+			groupes[nomGroupe] = groupes[nomGroupe].sort((a, b) => {
+				return a[correspondance[nomGroupe]] - b[correspondance[nomGroupe]];
+			})
 
-            if(parseInt(groupes[nomGroupe][0][correspondance[nomGroupe]]) < parseInt(etudiant[correspondance[nomGroupe]])){ 
-                groupes[nomGroupe].push(etudiant);
-                return groupes[nomGroupe].shift();
-            } else {
-                return etudiant;
-            }
-        }
-    </script>
+			if (parseInt(groupes[nomGroupe][0][correspondance[nomGroupe]]) < parseInt(etudiant[correspondance[nomGroupe]])) {
+				groupes[nomGroupe].push(etudiant);
+				return groupes[nomGroupe].shift();
+			} else {
+				return etudiant;
+			}
+		}
+
+		/*********************************/
+		/* Réalisé par Sébastien Lehmann */
+		/* MMI Mulhouse                  */
+		/*********************************/
+
+	</script>
 </body>
 
 </html>
