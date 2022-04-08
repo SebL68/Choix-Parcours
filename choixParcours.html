@@ -130,7 +130,7 @@
         <h1>Automatisation du choix de parcours</h1>
         <p>Cette application utilise les algorythmes de mariages stables pour placer les étudiants dans les parcours en fonctions de leurs voeux.</p>
         <ol>
-            <li>Dans un tableau, créez les colonnes :<br>
+            <li>Utilisez le <a href="https://github.com/SebL68/Choix-Parcours">fichier xlsx</a> ou créez un tableau, avec les colonnes :<br>
                 <ul>
                     <li>Nom / Prénom</li>
                     <li class=parcours>Notes premier parcours</li>
@@ -144,7 +144,7 @@
                 </ul>
             </li>
 			<li>Ajoutez le nombre d'admis dans chaque parcours comme sur l'exemple ci-après.</li>
-            <li>Complétez les notes afin de créer un classement des étudiants dans chaque parcours. Ces notes peuvent être extraites des moyennes UE ou réalisées par les enseignants.</li>
+            <li>Complétez les notes afin de créer un classement des étudiants dans chaque parcours.<br>Ces notes peuvent être extraites des moyennes UE ou réalisées par les enseignants.</li>
             <li>Copiez toutes les valeurs de votre tableur avec l'entête.</li>
             <li>
 				<div class="tableau">
@@ -290,7 +290,7 @@
 /* Algo de tri */
 /*****************************************/
         function processData(){
-            for(let i=1 ; i<4 ; i++){
+            for(let i=1 ; i<nbParcours+1 ; i++){
                 let aTraiter = [];
                 etudiants.forEach(etudiant => {
                     let voeux = getVoeux(etudiant, i);
@@ -336,6 +336,8 @@
 				output += "</div>";
 			})
 			document.querySelector(".resultat").innerHTML = `<style>.resultat>div{grid-template-columns: repeat(${entete.length}, auto)}</style>` + output;
+
+			document.querySelector(".resultat").scrollIntoView();
 		}
 
 		function download(){
