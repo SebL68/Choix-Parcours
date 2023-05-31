@@ -333,7 +333,7 @@
 				let aTraiter = [];
 				etudiants.forEach(etudiant => {
 					let voeux = getVoeux(etudiant, i);
-					if (groupes[voeux].length < max[voeux]) {   // Le groupe n'est pas plein, on y ajoute l'étudiant
+					if (max[voeux] != 0 && groupes[voeux].length < max[voeux]) {   // Le groupe n'est pas plein, on y ajoute l'étudiant
 						groupes[voeux].push(etudiant);
 					} else {
 						aTraiter.push(groupePlein(voeux, etudiant));
@@ -453,7 +453,7 @@
 				return a[correspondance[nomGroupe]] - b[correspondance[nomGroupe]];
 			})
 
-			if (parseInt(groupes[nomGroupe][0][correspondance[nomGroupe]]) < parseInt(etudiant[correspondance[nomGroupe]])) {
+			if (max[nomGroupe] != 0 && parseInt(groupes[nomGroupe][0][correspondance[nomGroupe]]) < parseInt(etudiant[correspondance[nomGroupe]])) {
 				groupes[nomGroupe].push(etudiant);
 				return groupes[nomGroupe].shift();
 			} else {
